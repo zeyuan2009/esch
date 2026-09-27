@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Tournament Portal</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
+  <link rel="stylesheet" href="404.css">
+</head>
+<body>
+
+  <!-- Top Header Bar -->
+  <header class="top-bar">
+    <div class="brand">
+      <span class="material-symbols-outlined logo-icon">emoji_events</span>
+      <span class="brand-name">Tournament Portal</span>
+    </div>
+    
+    <div class="top-bar-actions">
+      <button id="themeToggleBtn" class="icon-btn" aria-label="Toggle Theme">
+        <span class="material-symbols-outlined">dark_mode</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Error Content Area -->
+  <main class="error-container">
+    <div class="error-card">
+      <div class="error-badge">404</div>
+      <span class="material-symbols-outlined error-icon">sports_esports</span>
+      <h1>Game Over! Page Not Found</h1>
+      <p class="error-description">
+        The route or tournament bracket you are searching for doesn't exist or has been relocated.
+      </p>
+      
+      <div class="error-actions">
+        <button id="goBackBtn" class="btn btn-secondary">
+          <span class="material-symbols-outlined">arrow_back</span> Go Back
+        </button>
+        <a href="../index.html" class="btn btn-primary">
+          <span class="material-symbols-outlined">dashboard</span> Back to Dashboard
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script src="404.js"></script>
+</body>
+</html>

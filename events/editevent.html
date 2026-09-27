@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Event | Tournament Portal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
+  <link rel="stylesheet" href="registerevent.css">
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="brand-container">
+      <button id="hamburgerBtn" class="icon-btn mobile-menu-btn" aria-label="Toggle Navigation Menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="brand">
+        <span class="material-symbols-outlined logo-icon" data-config="brand-icon">emoji_events</span>
+        <span class="brand-name" data-config="brand-name">Tournament Portal</span>
+      </div>
+    </div>
+    
+    <div class="top-bar-actions">
+      <div class="user-badge">
+        <span class="material-symbols-outlined">account_circle</span>
+        <span class="user-name">Staff Admin</span>
+      </div>
+      <button id="themeToggleBtn" class="icon-btn" aria-label="Toggle Theme"></button>
+      <button id="logoutBtn" class="icon-btn logout-btn" aria-label="Log Out" title="Log Out">
+        <span class="material-symbols-outlined">logout</span>
+      </button>
+    </div>
+  </header>
+
+  <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
+  <div class="app-layout">
+    <aside id="sidebar" class="sidebar">
+      <nav id="sidebarNavContainer" class="nav-menu"></nav>
+    </aside>
+
+    <main class="page-container">
+      <div class="page-header">
+        <div>
+          <h1>Edit Event</h1>
+          <p class="subtitle" id="eventIdDisplay">Loading event parameters...</p>
+        </div>
+        <a href="viewevents.html" class="btn btn-secondary">
+          <span class="material-symbols-outlined">arrow_back</span> Cancel
+        </a>
+      </div>
+
+      <form id="editEventForm" class="form-card">
+        <div class="form-body-container">
+          <div id="formFeedback"></div>
+
+          <div class="form-group">
+            <label for="eventName">Event Name *</label>
+            <input type="text" id="eventName" required placeholder="e.g. Tekken 8 / Valorant">
+          </div>
+
+          <div class="form-row-2col">
+            <div class="form-group">
+              <label for="gameFormat">Game Format *</label>
+              <select id="gameFormat" required>
+                <option value="" disabled>Select Format</option>
+                <option value="1v1">1v1</option>
+                <option value="3v3">3v3</option>
+                <option value="5v5">5v5</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="maxEntrants">Maximum Entrants *</label>
+              <input type="number" id="maxEntrants" min="2" max="512" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="registrationFee">Registration Fee (RM) *</label>
+            <input type="number" id="registrationFee" min="0" step="0.01" required>
+          </div>
+
+          <div class="form-group remarks-group">
+            <label for="remarks">Remarks</label>
+            <textarea id="remarks"></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <a href="viewevents.html" class="btn btn-secondary">Cancel</a>
+          <button type="submit" id="submitBtn" class="btn btn-primary">
+            <span class="material-symbols-outlined">save</span> Save Changes
+          </button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script src="../util.js"></script>
+  <script src="editevent.js"></script>
+</body>
+</html>

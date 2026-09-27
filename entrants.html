@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrants Directory | Tournament Portal</title>
+  
+  <!-- Fonts & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="/events/viewevents.css">
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
+  <!-- Top Header -->
+  <header class="top-header">
+    <div class="header-left">
+      <button id="hamburgerBtn" class="icon-btn hamburger-btn" aria-label="Toggle Menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="brand">
+        <span class="material-symbols-outlined logo-icon" data-config="brand-icon">emoji_events</span>
+        <span class="brand-title" data-config="brand-name">Tournament Portal</span>
+      </div>
+      <h1 class="page-title">Entrants Directory</h1>
+    </div>
+
+    <div class="header-right">
+      <button id="themeToggleBtn" class="icon-btn" aria-label="Toggle Theme"></button>
+    </div>
+  </header>
+
+  <!-- App Container Layout -->
+  <div class="app-container">
+
+    <!-- Left Sidebar -->
+    <aside id="sidebar" class="sidebar">
+      <nav id="sidebarNavContainer" class="sidebar-nav">
+        <!-- Dynamic rendering via util.js -->
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <span class="material-symbols-outlined user-avatar">account_circle</span>
+          <div class="user-info">
+            <span class="user-name">John Doe</span>
+            <span class="user-role">Administrator</span>
+          </div>
+        </div>
+        <button id="logoutBtn" class="icon-btn logout-btn" title="Logout">
+          <span class="material-symbols-outlined">logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content-body">
+      <!-- Loading Overlay -->
+      <div id="contentLoadingOverlay" class="content-loading-overlay">
+        <div class="loading-spinner"></div>
+      </div>
+
+      <!-- Header Action Controls -->
+      <section class="events-action-bar">
+        <div style="display: flex; gap: 0.75rem; flex: 1; max-width: 620px; flex-wrap: wrap;">
+          <div class="search-box">
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input type="text" id="entrantSearchInput" placeholder="Search by name, phone, or ID..." oninput="filterEntrants()">
+          </div>
+          <select id="eventFilterSelect" class="form-input" style="max-width: 220px;" onchange="filterEntrants()">
+            <option value="">All Events</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary" onclick="openRegisterModal()">
+          <span class="material-symbols-outlined">person_add</span>
+          <span>Register Entrant</span>
+        </button>
+      </section>
+
+      <!-- Data Table Card -->
+      <section class="dashboard-card">
+        <div id="entrantsTableContainer">
+          <p class="placeholder-text">Loading entrants list...</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Register/Edit Entrant Modal -->
+  <div id="entrantModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle">Register Entrant</h3>
+        <button class="icon-btn" onclick="closeModal()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <form id="entrantForm" onsubmit="handleEntrantSubmit(event)">
+        <input type="hidden" id="modalEntrantId">
+        
+        <div class="form-group">
+          <label for="modalEventSelect">Target Event *</label>
+          <select id="modalEventSelect" class="form-input" required>
+            <option value="">-- Select Event --</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="modalFullNameEN">Full Name (EN) *</label>
+            <input type="text" id="modalFullNameEN" class="form-input" required placeholder="John Smith">
+          </div>
+          <div class="form-group">
+            <label for="modalFullNameCN">Full Name (CN)</label>
+            <input type="text" id="modalFullNameCN" class="form-input" placeholder="e.g. 张三">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="modalPhoneNumber">Phone Number *</label>
+            <input type="text" id="modalPhoneNumber" class="form-input" required placeholder="+60123456789">
+          </div>
+          <div class="form-group">
+            <label for="modalClass">Class</label>
+            <input type="text" id="modalClass" class="form-input" placeholder="e.g. 5A">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="modalSchoolId">School ID</label>
+            <input type="text" id="modalSchoolId" class="form-input" placeholder="e.g. S12345">
+          </div>
+          <div class="form-group">
+            <label for="modalRole">Role</label>
+            <input type="text" id="modalRole" class="form-input" placeholder="Captain / Solo / Member">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="modalResult">Result / Form Response Data</label>
+          <input type="text" id="modalResult" class="form-input" placeholder="Recorded result or score">
+        </div>
+
+        <div class="form-group">
+          <label for="modalReceiptUrl">Payment Receipt Drive URL</label>
+          <input type="url" id="modalReceiptUrl" class="form-input" placeholder="https://drive.google.com/...">
+        </div>
+
+        <div id="modalFeedback" class="feedback-msg"></div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" id="saveEntrantBtn" class="btn btn-primary">Save Entrant</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Global Utility & Page Scripts -->
+  <script src="/util.js"></script>
+  <script src="/entrants.js"></script>
+</body>
+</html>

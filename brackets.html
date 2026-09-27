@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tournament Brackets | Portal</title>
+
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="brackets.css">
+</head>
+<body>
+
+  <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
+  <!-- Top Navigation Header -->
+  <header class="top-header">
+    <div class="header-left">
+      <button id="hamburgerBtn" class="icon-btn hamburger-btn" aria-label="Toggle Menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="brand">
+        <span class="material-symbols-outlined logo-icon">emoji_events</span>
+        <span class="brand-title">Tournament Portal</span>
+      </div>
+      <h1 class="page-title">Tournament Brackets</h1>
+    </div>
+    <div class="header-right">
+      <button id="themeToggleBtn" class="icon-btn" aria-label="Toggle Theme">
+        <span class="material-symbols-outlined">dark_mode</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <!-- Navigation Sidebar -->
+    <aside id="sidebar" class="sidebar">
+      <nav id="sidebarNavContainer" class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item">
+          <span class="material-symbols-outlined">dashboard</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="events.html" class="nav-item">
+          <span class="material-symbols-outlined">calendar_today</span>
+          <span>Events</span>
+        </a>
+        <a href="entrants.html" class="nav-item">
+          <span class="material-symbols-outlined">group</span>
+          <span>Entrants</span>
+        </a>
+        <a href="brackets.html" class="nav-item active">
+          <span class="material-symbols-outlined">account_tree</span>
+          <span>Brackets</span>
+        </a>
+        <a href="matches.html" class="nav-item">
+          <span class="material-symbols-outlined">sports_esports</span>
+          <span>Matches</span>
+        </a>
+        <a href="staff.html" class="nav-item">
+          <span class="material-symbols-outlined">badge</span>
+          <span>Staff</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <span class="material-symbols-outlined user-avatar">account_circle</span>
+          <div class="user-info">
+            <span class="user-name">Administrator</span>
+            <span class="user-role">Administrator</span>
+          </div>
+        </div>
+        <button id="logoutBtn" class="icon-btn logout-btn" title="Logout">
+          <span class="material-symbols-outlined">logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Viewport -->
+    <main class="content-body">
+      <section class="bracket-action-bar">
+        <div class="bar-left">
+          <select id="bracketEventSelect" class="form-input">
+            <option value="">-- Select Event --</option>
+          </select>
+        </div>
+
+        <div class="bar-right">
+          <button class="btn btn-secondary" onclick="finalizeBracket()">
+            <span class="material-symbols-outlined">lock</span>
+            <span>Finalize & Close Registration</span>
+          </button>
+          <button class="btn btn-secondary" onclick="redirectToMatches()">
+            <span class="material-symbols-outlined">edit_note</span>
+            <span>Edit Matches</span>
+          </button>
+          <button class="btn btn-primary" onclick="triggerGenerateBracket()">
+            <span class="material-symbols-outlined">alt_route</span>
+            <span>Generate Bracket</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Drag-and-Drop Helper Info Banner -->
+      <div id="dragHintBanner" class="info-banner hidden">
+        <span class="material-symbols-outlined">drag_indicator</span>
+        <span>Drag and drop Round 1 participant cards to swap match positions before scoring begins.</span>
+      </div>
+
+      <!-- Main Bracket Viewer Canvas -->
+      <div class="bracket-viewport">
+        <svg id="bracket-svg-canvas"></svg>
+        <div id="bracketCanvas" class="bracket-canvas">
+          <p class="placeholder-text">Select an event to load or structure its tournament bracket.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Score Update Modal -->
+  <div id="scoreModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Submit Match Result</h3>
+        <button class="icon-btn" onclick="closeScoreModal()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <form id="scoreForm" onsubmit="handleScoreSubmit(event)">
+        <input type="hidden" id="modalMatchId">
+
+        <div class="score-input-row">
+          <div class="team-score-box">
+            <label id="modalP1Name">Participant 1</label>
+            <input type="number" id="modalScore1" class="form-input score-field" min="0" required value="0">
+          </div>
+          <div class="vs-divider">VS</div>
+          <div class="team-score-box">
+            <label id="modalP2Name">Participant 2</label>
+            <input type="number" id="modalScore2" class="form-input score-field" min="0" required value="0">
+          </div>
+        </div>
+
+        <div id="scoreModalFeedback" class="feedback-msg"></div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeScoreModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Result & Advance</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Manual Slot Entrant Selection Modal -->
+  <div id="manualAssignModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Assign Participant</h3>
+        <button class="icon-btn" onclick="closeManualAssignModal()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <label for="manualEntrantSelect">Select Registered Participant:</label>
+        <select id="manualEntrantSelect" class="form-input modal-select">
+          <option value="">-- Select Participant --</option>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeManualAssignModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="confirmManualAssign()">Assign Slot</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adjudicator Match Assignment Modal -->
+  <div id="adjAssignModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Assign Adjudicator</h3>
+        <button class="icon-btn" onclick="closeAssignModal()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <input type="hidden" id="adjModalMatchId">
+        <label for="adjStaffSelect">Select Staff / Adjudicator:</label>
+        <select id="adjStaffSelect" class="form-input modal-select">
+          <option value="">-- Select Adjudicator --</option>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeAssignModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="confirmAssignAdjudicator()">Assign Adjudicator</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="util.js"></script>
+  <script src="brackets.js"></script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+/* ==========================================================================
+   FIXED VIEWPORT & MATCHES STYLES
+   ========================================================================== */
+
+html, body.no-scroll-body {
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+.page-fixed-layout {
+  height: calc(100vh - 60px);
+  display: flex;
+  overflow: hidden;
+}
+
+.fixed-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+.matches-action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.filter-item label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.styled-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.5rem 2.25rem 0.5rem 0.875rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.styled-select:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.8rem;
+  height: 0.8rem;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+/* Table Container */
+.table-card-wrapper {
+  flex: 1;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.matches-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+  table-layout: auto;
+}
+
+.matches-table th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--bg-input);
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding: 0.75rem 0.875rem;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.matches-table td {
+  padding: 0.75rem 0.875rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  vertical-align: middle;
+  word-break: break-word;
+}
+
+.matches-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.matches-table tr.highlighted-row {
+  background-color: var(--accent-light);
+  border-left: 4px solid var(--accent-color);
+}
+
+.action-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex-wrap: nowrap;
+}
+
+.action-btn-group button .material-symbols-outlined {
+  pointer-events: none;
+}
+
+.table-placeholder {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 3rem 1rem !important;
+  font-style: italic;
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.625rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.status-badge.pending {
+  background-color: var(--bg-input);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.status-badge.completed {
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+.status-badge.bye {
+  background-color: var(--accent-light);
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+}
+
+.winner-text {
+  font-weight: 700;
+  color: var(--success-text);
+}
+
+/* ==========================================================================
+   FIXED VIEWPORT MODAL OVERLAYS & FORM LAYOUT
+   ========================================================================== */
+
+.modal-backdrop {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999 !important;
+}
+
+.modal-backdrop.hidden {
+  display: none !important;
+}
+
+.modal-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  position: relative;
+  z-index: 10000;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Modal Form Grid Layout */
+.modal-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group.full-width {
+  grid-column: span 2;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Modal Inputs Styling */
+.form-input {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.textarea-input {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* Score Modal Custom Row */
+.score-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.team-score-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.team-score-box label {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.score-field {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.vs-divider {
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.feedback-msg {
+  color: #f87171;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Mobile responsive collapse for modal form */
+@media (max-width: 580px) {
+  .modal-form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-group.full-width {
+    grid-column: span 1;
+  }
+}
+
+/* ==========================================================================
+   PROGRESSIVE COLUMN HIDING RESPONSIVE RULES
+   ========================================================================== */
+
+/* Step 1: Hide Venue & Adjudicator on medium desktop/laptop sizes */
+@media (max-width: 1200px) {
+  .matches-table th:nth-child(6),
+  .matches-table td:nth-child(6),
+  .matches-table th:nth-child(7),
+  .matches-table td:nth-child(7) {
+    display: none;
+  }
+}
+
+/* Step 2: Hide Status on tablets (1100px and below) */
+@media (max-width: 1100px) {
+  .matches-table th:nth-child(8),
+  .matches-table td:nth-child(8) {
+    display: none;
+  }
+}
+
+/* Step 3: Mobile Card View (768px and below) */
+@media (max-width: 768px) {
+  .matches-action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .styled-select {
+    width: 100%;
+  }
+
+  /* Reset hidden columns so mobile cards show all data */
+  .matches-table th:nth-child(6),
+  .matches-table td:nth-child(6),
+  .matches-table th:nth-child(7),
+  .matches-table td:nth-child(7),
+  .matches-table th:nth-child(8),
+  .matches-table td:nth-child(8) {
+    display: flex !important;
+  }
+
+  /* Switch Table to Stacked Card Grid */
+  .matches-table, 
+  .matches-table thead, 
+  .matches-table tbody, 
+  .matches-table th, 
+  .matches-table td, 
+  .matches-table tr {
+    display: block;
+  }
+
+  .matches-table thead {
+    display: none;
+  }
+
+  .matches-table tbody tr {
+    margin: 0.875rem;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .matches-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: right;
+  }
+
+  .matches-table td:last-child {
+    border-bottom: none;
+    margin-top: 0.5rem;
+  }
+
+  .matches-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    text-align: left;
+    margin-right: 1rem;
+  }
+
+  .action-btn-group {
+    justify-content: flex-end;
+  }
+}

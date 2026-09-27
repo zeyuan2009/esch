@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Login | Tournament Portal</title>
+  
+  <!-- Fonts & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="login.css">
+</head>
+<body class="login-page">
+
+  <!-- Floating Theme Toggle Header -->
+  <header class="login-header">
+    <button id="themeToggleBtn" class="icon-btn" aria-label="Toggle Theme"></button>
+  </header>
+
+  <!-- Central Authentication Card -->
+  <main class="login-container">
+    <div class="login-card">
+      
+      <!-- Brand & Header Title -->
+      <div class="login-brand">
+        <span class="material-symbols-outlined logo-icon" data-config="brand-icon">emoji_events</span>
+        <h1 data-config="brand-name">Tournament Portal</h1>
+        <p class="subtitle">Staff Administration Login</p>
+      </div>
+
+      <!-- Feedback Banner for Validation Errors -->
+      <div id="loginFeedback"></div>
+
+      <!-- Authentication Form -->
+      <form id="loginForm" autocomplete="off">
+        
+        <!-- Staff ID Input -->
+        <div class="form-group">
+          <label for="staffId">Staff ID</label>
+          <div class="input-icon-wrapper">
+            <span class="material-symbols-outlined input-icon">badge</span>
+            <input 
+              type="text" 
+              id="staffId" 
+              placeholder="e.g. STAFF_01" 
+              required 
+              autofocus
+              spellcheck="false"
+            >
+          </div>
+        </div>
+
+        <!-- Security PIN Input -->
+        <div class="form-group">
+          <label for="pin">Security PIN / Password</label>
+          <div class="input-icon-wrapper">
+            <span class="material-symbols-outlined input-icon">lock</span>
+            <input 
+              type="password" 
+              id="pin" 
+              placeholder="••••••••" 
+              required 
+            >
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="loginBtn" class="btn btn-primary btn-block">
+          <span class="material-symbols-outlined">login</span>
+          <span>Sign In</span>
+        </button>
+
+      </form>
+
+    </div>
+  </main>
+
+  <!-- Core Utility Scripts -->
+  <script src="util.js"></script>
+  <script src="login.js"></script>
+</body>
+</html>

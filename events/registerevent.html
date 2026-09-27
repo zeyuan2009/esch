@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Event | Tournament Portal</title>
+  
+  <!-- Fonts & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="registerevent.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="top-bar">
+    <div class="brand-container">
+      <button id="hamburgerBtn" class="icon-btn mobile-menu-btn" aria-label="Toggle Navigation Menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="brand">
+        <span class="material-symbols-outlined logo-icon" data-config="brand-icon">emoji_events</span>
+        <span class="brand-name" data-config="brand-name">ESCH Portal</span>
+      </div>
+    </div>
+    
+    <div class="top-bar-actions">
+      <div class="user-badge">
+        <span class="material-symbols-outlined">account_circle</span>
+        <span class="user-name">Staff Admin</span>
+      </div>
+      <button id="themeToggleBtn" class="icon-btn" aria-label="Toggle Theme">
+        <span class="material-symbols-outlined">dark_mode</span>
+      </button>
+      <button id="logoutBtn" class="icon-btn logout-btn" aria-label="Log Out" title="Log Out">
+        <span class="material-symbols-outlined">logout</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Backdrop -->
+  <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
+  <!-- Application Layout -->
+  <div class="app-layout">
+    
+    <!-- Dynamic Navigation Sidebar -->
+    <aside id="sidebar" class="sidebar">
+      <nav id="sidebarNavContainer" class="nav-menu">
+        <!-- Rendered dynamically by nav-renderer.js via config.js -->
+      </nav>
+    </aside>
+
+    <!-- Main Content Container -->
+    <main class="page-container">
+      
+      <div class="page-header">
+        <div>
+          <h1>Register Event</h1>
+          <p class="subtitle">Set up basic event parameters and entry conditions.</p>
+        </div>
+        <a href="/events/viewevents.html" class="btn btn-secondary">
+          <span class="material-symbols-outlined">arrow_back</span> Back to Events
+        </a>
+      </div>
+
+      <!-- Main Form Container -->
+      <form id="registerEventForm" class="form-card">
+        
+        <div class="form-body-container">
+          
+          <!-- 1. Event Name -->
+          <div class="form-group">
+            <label for="eventName">Event Name *</label>
+            <input type="text" id="eventName" required placeholder="e.g. Tekken 8 / Valorant">
+          </div>
+
+          <!-- 2. Game Format & Max Entrants Row -->
+          <div class="form-row-2col">
+            <div class="form-group">
+              <label for="gameFormat">Game Format *</label>
+              <select id="gameFormat" required>
+                <option value="" disabled selected>Select Format</option>
+                <option value="1v1">1v1</option>
+                <option value="3v3">3v3</option>
+                <option value="5v5">5v5</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="maxEntrants">Maximum Entrants *</label>
+              <input type="number" id="maxEntrants" min="2" max="512" placeholder="e.g. 64" required>
+            </div>
+          </div>
+
+          <!-- 3. Registration Fee -->
+          <div class="form-group">
+            <label for="registrationFee">Registration Fee (RM) *</label>
+            <input type="number" id="registrationFee" min="0" step="0.01" placeholder="0.00" required>
+          </div>
+
+          <!-- 4. Remarks (Flexes vertically to fill space) -->
+          <div class="form-group remarks-group">
+            <label for="remarks">Remarks</label>
+            <textarea id="remarks" placeholder="Enter additional guidelines, prize distribution, or match rules..."></textarea>
+          </div>
+
+        </div>
+
+        <!-- Form Action Buttons -->
+        <div class="form-actions">
+          <button type="reset" class="btn btn-secondary">Reset</button>
+          <button type="submit" class="btn btn-primary">
+            <span class="material-symbols-outlined">add_circle</span> Register Event
+          </button>
+        </div>
+
+      </form>
+
+    </main>
+
+  </div>
+
+  <!-- Central Configuration & System Scripts -->
+  <script src="/util.js"></script>
+  <script src="/events/registerevent.js"></script>
+</body>
+</html>

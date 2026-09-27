@@ -1,0 +1,442 @@
+/* ==========================================================================STAFF MANAGEMENT STYLES (staff.css)========================================================================== */
+/* Page & Layout Structure */
+/* Page & Layout Structure */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  min-width: 400px; /* Enforces minimum page width */
+  overflow-x: auto;  /* Allows horizontal scroll if window is smaller than 400px */
+}
+
+.page-fixed-layout {
+  height: calc(100vh - 60px);
+  display: flex;
+  overflow: hidden;
+  min-width: 400px; /* Prevents layout from collapsing below 400px */
+}
+
+.fixed-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
+	padding: 1.25rem;
+	box-sizing: border-box;
+}
+/* ==========================================================================ACTION & FILTER BAR========================================================================== */
+.action-bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	gap: 1rem;
+	margin-bottom: 1.25rem;
+	flex-shrink: 0;
+	flex-wrap: wrap;
+	width: 100%;
+}
+.filter-group {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+	flex: 1;
+}
+.filter-item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	flex: 1;
+	min-width: 160px;
+}
+.filter-item label {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: var(--text-secondary, #9ca3af);
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+/* Form Controls & Full-Width Inputs */
+.search-wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+.search-wrapper .material-symbols-outlined {
+	position: absolute;
+	left: 0.75rem;
+	color: var(--text-secondary, #9ca3af);
+	font-size: 1.2rem;
+	pointer-events: none;
+}
+.search-input {
+	padding-left: 2.35rem !important;
+	width: 100%;
+	box-sizing: border-box;
+}
+.select-wrapper {
+	position: relative;
+	display: block;
+	width: 100%;
+}
+.styled-select,.styled-input {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 100%;
+	box-sizing: border-box;
+	background-color: var(--bg-surface, #1e1e2e);
+	color: var(--text-primary, #ffffff);
+	border: 1px solid var(--border-color, #313244);
+	border-radius: 0.5rem;
+	padding: 0.5rem 0.875rem;
+	font-size: 0.875rem;
+	font-family: inherit;
+	font-weight: 500;
+	outline: none;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.styled-select {
+	padding-right: 2.25rem;
+	cursor: pointer;
+}
+.styled-select:focus,.styled-input:focus {
+	border-color: var(--accent-color, #6366f1);
+	box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+.select-wrapper::after {
+	content: "";
+	position: absolute;
+	right: 0.875rem;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 0.8rem;
+	height: 0.8rem;
+	pointer-events: none;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+/* ==========================================================================TABLE DESIGN & STRICT COLUMN ALIGNMENT========================================================================== */
+.table-card-wrapper,.table-responsive {
+	flex: 1;
+	width: 100%;
+	background-color: var(--bg-surface, #1e1e2e);
+	border: 1px solid var(--border-color, #313244);
+	border-radius: 0.75rem;
+	overflow-y: auto;
+	overflow-x: hidden;
+	box-sizing: border-box;
+    min-width: 0px;
+}
+.staff-table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+	font-size: 0.875rem;
+	table-layout: fixed;
+	/* Enforces absolute alignment between th and td */
+}
+.staff-table th {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background-color: var(--bg-input, #181825);
+	color: var(--text-secondary, #9ca3af);
+	font-weight: 600;
+	padding: 0.85rem 1rem;
+	border-bottom: 1px solid var(--border-color, #313244);
+	white-space: nowrap;
+	box-sizing: border-box;
+}
+.staff-table td {
+	padding: 0.85rem 1rem;
+	border-bottom: 1px solid var(--border-color, #313244);
+	color: var(--text-primary, #ffffff);
+	vertical-align: middle;
+	white-space: nowrap;
+	box-sizing: border-box;
+}
+.staff-table tbody tr:hover {
+	background-color: rgba(255, 255, 255, 0.03);
+}
+/* Default Column Percentages (Desktop Widths) */
+.staff-table th:nth-child(1), .staff-table td:nth-child(1) {
+	width: 30%;
+}
+/* Staff Member */
+.staff-table th:nth-child(2), .staff-table td:nth-child(2) {
+	width: 15%;
+}
+/* Role */
+.staff-table th:nth-child(3), .staff-table td:nth-child(3) {
+	width: 18%;
+}
+/* Contact Details */
+.staff-table th:nth-child(4), .staff-table td:nth-child(4) {
+	width: 15%;
+}
+/* Assignment */
+.staff-table th:nth-child(5), .staff-table td:nth-child(5) {
+	width: 12%;
+}
+/* Status */
+.staff-table th:nth-child(6), .staff-table td:nth-child(6) {
+	width: 10%;
+	text-align: right;
+}
+/* Actions */
+/* Staff Info Cell */
+.user-info-cell,.staff-info-cell {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	white-space: nowrap;
+}
+.avatar,.staff-avatar {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background-color: var(--accent-light, rgba(99, 102, 241, 0.15));
+	color: var(--accent-color, #6366f1);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+	font-size: 0.85rem;
+	flex-shrink: 0;
+}
+.user-details,.staff-name-details {
+	display: flex;
+	flex-direction: column;
+}
+.user-name,.staff-name {
+	font-weight: 600;
+	color: var(--text-primary, #ffffff);
+	line-height: 1.2;
+}
+.user-id,.staff-id {
+	font-size: 0.75rem;
+	color: var(--text-secondary, #9ca3af);
+	line-height: 1.2;
+	margin-top: 2px;
+}
+/* Badges & Status */
+.role-badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.25rem 0.625rem;
+	border-radius: 0.375rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	white-space: nowrap;
+	background-color: var(--bg-input, #181825);
+	color: var(--text-secondary, #9ca3af);
+	border: 1px solid var(--border-color, #313244);
+	text-transform: capitalize;
+}
+.role-badge.admin {
+	background-color: rgba(245, 158, 11, 0.15);
+	color: #f59e0b;
+	border-color: rgba(245, 158, 11, 0.3);
+}
+.role-badge.adjudicator {
+	background-color: rgba(99, 102, 241, 0.15);
+	color: #818cf8;
+	border-color: rgba(99, 102, 241, 0.3);
+}
+.status-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.25rem 0.625rem;
+	border-radius: 1rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+.status-badge::before {
+	content: "";
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+}
+.status-badge.active {
+	background-color: rgba(34, 197, 94, 0.15);
+	color: #4ade80;
+	border: 1px solid rgba(34, 197, 94, 0.3);
+}
+.status-badge.active::before {
+	background-color: #4ade80;
+}
+.status-badge.inactive {
+	background-color: rgba(239, 68, 68, 0.15);
+	color: #f87171;
+	border: 1px solid rgba(239, 68, 68, 0.3);
+}
+.status-badge.inactive::before {
+	background-color: #f87171;
+}
+/* Material Icon & Action Buttons */
+.action-buttons,.action-btn-group {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.375rem;
+}
+.btn-icon {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 6px;
+	border-radius: 6px;
+	color: var(--text-secondary, #9ca3af);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.2s, color 0.2s;
+}
+.btn-icon:hover {
+	background: rgba(255, 255, 255, 0.1);
+	color: var(--text-primary, #ffffff);
+}
+.btn-icon.btn-danger:hover {
+	background: rgba(239, 68, 68, 0.2);
+	color: #ef4444;
+}
+.table-placeholder {
+	text-align: center;
+	color: var(--text-secondary, #9ca3af);
+	padding: 3rem 1rem !important;
+	font-style: italic;
+}
+/* ==========================================================================MODAL OVERLAY & FORMS========================================================================== */
+.modal-backdrop {
+	position: fixed !important;
+	top: 0 !important;
+	left: 0 !important;
+	width: 100vw !important;
+	height: 100vh !important;
+	background-color: rgba(0, 0, 0, 0.65);
+	backdrop-filter: blur(4px);
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+	z-index: 9999 !important;
+}
+.modal-backdrop.hidden {
+	display: none !important;
+}
+.modal-card {
+	background-color: var(--bg-surface, #1e1e2e);
+	border: 1px solid var(--border-color, #313244);
+	border-radius: 0.75rem;
+	padding: 1.5rem;
+	width: 90%;
+	max-width: 520px;
+	max-height: 90vh;
+	overflow-y: auto;
+	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+	position: relative;
+	z-index: 10000;
+}
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1.25rem;
+}
+.modal-header h3 {
+	margin: 0;
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: var(--text-primary, #ffffff);
+}
+.modal-form-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1rem;
+}
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+}
+.form-group.full-width {
+	grid-column: span 2;
+}
+.form-group label {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: var(--text-secondary, #9ca3af);
+	text-transform: uppercase;
+}
+.form-input {
+	width: 100%;
+	box-sizing: border-box;
+	background-color: var(--bg-input, #181825);
+	color: var(--text-primary, #ffffff);
+	border: 1px solid var(--border-color, #313244);
+	border-radius: 0.5rem;
+	padding: 0.6rem 0.75rem;
+	font-size: 0.875rem;
+	outline: none;
+	transition: border-color 0.2s ease;
+}
+.form-input:focus {
+	border-color: var(--accent-color, #6366f1);
+}
+.textarea-input {
+	resize: vertical;
+	min-height: 70px;
+}
+.modal-footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.75rem;
+	margin-top: 1.5rem;
+}
+.feedback-msg {
+	color: #f87171;
+	font-size: 0.8rem;
+	margin-top: 0.5rem;
+	text-align: center;
+}
+/* ==========================================================================PROGRESSIVE BREAKPOINTS & COLUMN HIDING========================================================================== */
+@media (max-width: 1140px) {
+	.staff-table th:nth-child(4),.staff-table td:nth-child(4) {
+		display: none;
+	}
+}
+/* Hide Contact Details below 900px */
+@media (max-width: 900px) {
+	.staff-table th:nth-child(3),.staff-table td:nth-child(3) {
+		display: none;
+	}
+}
+/* Hide Status column below 640px (Staff Member, Role, & Actions remain) */
+@media (max-width: 640px) {
+	.action-bar,.filter-group {
+		flex-direction: column;
+		align-items: stretch;
+	}
+	.modal-form-grid {
+		grid-template-columns: 1fr;
+	}
+	.form-group.full-width {
+		grid-column: span 1;
+	}
+	.staff-table th:nth-child(5),.staff-table td:nth-child(5) {
+		display: none;
+	}
+}
+
+@media (max-width: 520px) {
+    .staff-table th:nth-child(2),.staff-table td:nth-child(2) {
+        display: none;
+    }
+}

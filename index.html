@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Tournament Portal</title>
+  
+  <!-- Fonts & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+  
+  <!-- Page Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <!-- Mobile Sidebar Backdrop -->
+  <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
+  <!-- 1. Full-Width Top Header (Always Visible) -->
+  <header class="top-header">
+    <div class="header-left">
+      <button id="hamburgerBtn" class="icon-btn hamburger-btn" aria-label="Toggle Menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="brand">
+        <span class="material-symbols-outlined logo-icon" data-config="brand-icon">emoji_events</span>
+        <span class="brand-title" data-config="brand-name">Tournament Portal</span>
+      </div>
+      <h1 class="page-title">Dashboard</h1>
+    </div>
+
+    <div class="header-right">
+      <button id="themeToggleBtn" class="icon-btn" aria-label="Toggle Theme"></button>
+    </div>
+  </header>
+
+  <!-- 2. Main Workspace Layout -->
+  <div class="app-container">
+
+    <!-- Left Sidebar Navigation (Always Visible) -->
+    <aside id="sidebar" class="sidebar">
+      <nav id="sidebarNavContainer" class="sidebar-nav">
+        <!-- Injected dynamically via util.js -->
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <span class="material-symbols-outlined user-avatar">account_circle</span>
+          <div class="user-info">
+            <span class="user-name">John Doe</span>
+            <span class="user-role">Administrator</span>
+          </div>
+        </div>
+        <button id="logoutBtn" class="icon-btn logout-btn" title="Logout">
+          <span class="material-symbols-outlined">logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Right Main Content Body -->
+    <main class="content-body">
+      <!-- Content-Scoped Loading Overlay -->
+      <div id="contentLoadingOverlay" class="content-loading-overlay">
+        <div class="loading-spinner"></div>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <section class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon">
+            <span class="material-symbols-outlined">event</span>
+          </div>
+          <div class="metric-info">
+            <span class="metric-label">Total Events</span>
+            <h2 id="totalEventsCount" class="metric-value">--</h2>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon">
+            <span class="material-symbols-outlined">groups</span>
+          </div>
+          <div class="metric-info">
+            <span class="metric-label">Active Entrants</span>
+            <h2 id="totalEntrantsCount" class="metric-value">--</h2>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon">
+            <span class="material-symbols-outlined">pending_actions</span>
+          </div>
+          <div class="metric-info">
+            <span class="metric-label">Pending Matches</span>
+            <h2 id="pendingMatchesCount" class="metric-value">--</h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard Table Section -->
+      <section class="dashboard-section">
+        <div class="section-header">
+          <h2>Recent Events</h2>
+          <button class="btn btn-secondary btn-sm" onclick="navigateTo('events/viewevents.html')">
+            <span>View All</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+
+        <div id="recentEventsContainer" class="dashboard-card">
+          <p class="placeholder-text">Loading recent events...</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="util.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
