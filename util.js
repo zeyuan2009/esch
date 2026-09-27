@@ -7,7 +7,7 @@ const SYSTEM_CONFIG = {
   brand: {
     name: "Tournament Portal",
     icon: "emoji_events",
-    homeUrl: "/index.html"
+    homeUrl: "index.html"
   },
   sidebarNav: [
     { label: "Dashboard", icon: "dashboard", href: "index.html" },
@@ -132,7 +132,7 @@ function clearSessionAndRedirect() {
 }
 
 function redirectToLogin() {
-  window.location.replace('/login.html');
+  window.location.replace('login.html');
 }
 
 function logoutUser() {
